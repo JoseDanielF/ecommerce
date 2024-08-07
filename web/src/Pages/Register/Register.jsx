@@ -32,17 +32,6 @@ const Register = () => {
     });
   };
 
-  const validarDocumento = (tipo, documento) => {
-    if (tipo === 'pessoaComum') {
-      return cpf.isValid(documento);
-    } else if (tipo === 'departamento') {
-      return cnpj.isValid(documento);
-    } else if (tipo === 'veterinaria') {
-      return /^\d{6}$/.test(documento);
-    }
-    return false;
-  };
-
   const validarSenha = (senha) => {
     const minLength = 8;
     const hasUpperCase = /[A-Z]/.test(senha);
@@ -61,18 +50,10 @@ const Register = () => {
     } else if (!validarSenha(dadosCadastro.senha)) {
       alert('A senha deve ter no mínimo 8 caracteres, incluir uma letra maiúscula, uma letra minúscula, um número e um caractere especial.');
       return;
-    } else if (!validarDocumento(tipoCadastro, dadosCadastro.documento)) {
-      alert('Documento inválido');
-      return;
     }
 
     try {
-      const userData = {
-        ...dadosCadastro,
-        tipousuarioid: tipoCadastro === 'pessoaComum' ? 4 : tipoCadastro === 'veterinaria' ? 2 : 3
-      };
-
-      const response = await registerUser(JSON.stringify(userData));
+      const response = await registerUser(JSON.stringify(dadosCadastro));
 
       if (response.error === false) {
         alert('Usuário cadastrado com sucesso!');
@@ -85,13 +66,6 @@ const Register = () => {
       alert(error.message || 'Erro ao registrar usuário');
     }
   };
-
-  useEffect(() => {
-    setDadosCadastro(prevState => ({
-      ...prevState,
-      documento: ''
-    }));
-  }, [tipoCadastro]);
 
   useEffect(() => {
     const tamanho = dadosCadastro.senha.length >= 8;
@@ -108,27 +82,7 @@ const Register = () => {
         <img src={logo} alt="Logo" className={styles.logo} />
         <h2>Cadastro</h2>
       </div>
-      <p className={styles.userTypePrompt}>Selecione seu tipo de usuário</p>
-      <div className={styles.tabs}>
-        <button
-          className={tipoCadastro === 'pessoaComum' ? styles.activeTab : ''}
-          onClick={() => setTipoCadastro('pessoaComum')}
-        >
-          Pessoa Comum
-        </button>
-        <button
-          className={tipoCadastro === 'veterinaria' ? styles.activeTab : ''}
-          onClick={() => setTipoCadastro('veterinaria')}
-        >
-          Veterinária
-        </button>
-        <button
-          className={tipoCadastro === 'departamento' ? styles.activeTab : ''}
-          onClick={() => setTipoCadastro('departamento')}
-        >
-          Departamento
-        </button>
-      </div>
+
       <form onSubmit={submeter} className={styles.registerForm}>
         <div className={styles.formGroup}>
           <label htmlFor="email">Email:</label>
@@ -183,45 +137,19 @@ const Register = () => {
             required
           />
         </div>
-        {tipoCadastro === 'pessoaComum' && (
-          <div className={styles.formGroup}>
-            <label htmlFor="cpf">CPF:</label>
-            <input
-              type="text"
-              id="documento"
-              name="documento"
-              value={dadosCadastro.documento}
-              onChange={alterarDados}
-              required
-            />
-          </div>
-        )}
-        {tipoCadastro === 'veterinaria' && (
-          <div className={styles.formGroup}>
-            <label htmlFor="documento">Número do Registro de Medicina Veterinária:</label>
-            <input
-              type="text"
-              id="documento"
-              name="documento"
-              value={dadosCadastro.documento}
-              onChange={alterarDados}
-              required
-            />
-          </div>
-        )}
-        {tipoCadastro === 'departamento' && (
-          <div className={styles.formGroup}>
-            <label htmlFor="cnpj">CNPJ:</label>
-            <input
-              type="text"
-              id="documento"
-              name="documento"
-              value={dadosCadastro.documento}
-              onChange={alterarDados}
-              required
-            />
-          </div>
-        )}
+        
+        <div className={styles.formGroup}>
+          <label htmlFor="cpf">CPF:</label>
+          <input
+            type="text"
+            id="documento"
+            name="documento"
+            value={dadosCadastro.documento}
+            onChange={alterarDados}
+            required
+          />
+        </div>
+
         <div className={styles.formGroup}>
           <label htmlFor="telefone">Número do telefone com DDD:</label>
           <input
