@@ -64,9 +64,6 @@ const Login = () => {
           />
         </div>
         <button type="submit" className={styles.submitButton}>Entrar</button>
-        <p className={styles.forgotPasswordPrompt}>
-          Esqueceu sua senha? <Link to="/recuperarSenha">Recuperar senha</Link>
-        </p>
       </form>
       <p className={styles.registerPrompt}>
         Não tem uma conta? <Link to="/register">Cadastre-se</Link>

@@ -4,13 +4,10 @@ import dadosUserLogadoService from './Services/DadosUserLogado/DadosUserLogado-s
 //Pages
 import Login from './Pages/Login/Login';
 import Register from './Pages/Register/Register';
-import RecuperarSenha from './Pages/RecuperarSenha/RecuperarSenha';
 import TelaPrincipal from './Pages/TelaPrincipal/TelaPrincipal';
-import RedefinirSenha from './Pages/RedefinirSenha/RedefinirSenha';
 import UserProfile from './Pages/PerfilUsuario/PerfilUsuario';
 
 const PrivateRoute = ({ element, ...rest }) => {
-    console.log(dadosUserLogadoService.getUserInfo())
     const isAuthenticated = dadosUserLogadoService.getUserInfo() !== null;
     return isAuthenticated ? element : <Navigate to="/login" replace />;
 };
@@ -25,14 +22,10 @@ const Routes = () => (
     <BrowserRouter>
       <RouterRoutes>
         
-        {/* Rotas públicas */}
         <Route path='/' element={<Navigate to='/login' />} />
         <Route path='/login' element={<PublicRoute element={<Login />} />} />
         <Route path='/register' element={<PublicRoute element={<Register />} />} />
-        <Route path='/recuperarSenha' element={<PublicRoute element={<RecuperarSenha />} />} />
-        <Route path='/redefinirSenha' element={<PublicRoute element={<RedefinirSenha />} />} />
         
-        {/* Rotas Privadas */}
         <Route path='/telaPrincipal' element={<PrivateRoute element={<TelaPrincipal />} />} />
         <Route path='/perfil' element={<PrivateRoute element={<UserProfile />} />} />
       </RouterRoutes>
