@@ -1,0 +1,142 @@
+.registerContainer {
+  background-color: #1C4839;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+ 
+.passwordCriteria {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.registerHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.registerHeader .logo {
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.registerHeader h2 {
+  margin: 10px 0;
+}
+
+@media (max-width: 600px) {
+  .registerHeader {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .registerHeader .logo {
+    margin-bottom: 5px;
+  }
+}
+
+.registerForm {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
+}
+
+.tabs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 8px;
+}
+
+.tabs button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  background-color: #FF9113;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 2px;
+}
+
+.tabs button.activeTab {
+  background-color: #1C4839;
+  color: white;
+}
+
+.tabs button:not(.activeTab):hover {
+  background-color: #E68010;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.formGroup label {
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.formGroup input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.userTypePrompt {
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.submitButton {
+  padding: 10px;
+  background-color: #FF9113;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.submitButton:hover {
+  background-color: #E68010;
+}
+
+.backToLogin {
+  margin-top: 10px;
+  text-align: center;
+  color: white;
+}
+
+.backToLogin a {
+  color: #FF9113; 
+  text-decoration: none;
+}
+
+.backToLogin a:hover {
+  color: #E68010; 
+}
+
+.passwordTooltip {
+  color: black;
+
+}
+

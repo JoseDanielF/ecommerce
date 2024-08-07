@@ -1,0 +1,39 @@
+.headerContainer {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #FF9113;
+  color: #fff; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 0 10px;
+}
+
+.title {
+  font-size: 1.3em;
+  margin-left: 10px;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.profileIcon {
+  font-size: 2em;
+  cursor: pointer;
+  color: #fff; 
+  margin-left: 10px; 
+}
+
+.profileIcon:hover {
+  color: #555; 
+}
+
+.mainContent {
+  padding-top: 60px;
+}

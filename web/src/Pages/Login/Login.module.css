@@ -1,0 +1,95 @@
+.loginContainer {
+    background-color: #1C4839;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .logo {
+    width: 250px;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin: 10px 0 20px;
+  }
+  
+  .loginForm {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .formGroup label {
+    margin-bottom: 5px;
+    color: #333;
+  }
+  
+  .formGroup input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .submitButton {
+    padding: 10px 15px;
+    background-color: #FF9113;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  .submitButton:hover {
+    background-color: #E68010;
+  }
+  
+  .forgotPasswordPrompt {
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  .registerPrompt {
+    margin-top: 20px;
+    color: white;
+  }
+  
+  .registerPrompt a {
+    color: #FF9113;
+    text-decoration: none;
+  }
+  
+  .registerPrompt a:hover {
+    color: #E68010;
+  }
+  
+  .forgotPasswordPrompt a {
+    color: #FF9113;
+    text-decoration: none;
+  }
+  
+  .forgotPasswordPrompt a:hover {
+    color: #E68010;
+  }

@@ -1,0 +1,71 @@
+.UserProfileContainer {
+  background-color: #1C4839;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.UserProfileContainer h2 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.paper {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.title {
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonContainer { 
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.SaveButton, .BackButton { 
+  padding: 15px 30px;
+  font-size: 18px; 
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.SaveButton {
+  background-color: #FF9113;
+  color: #fff;
+  border: none;
+}
+
+.SaveButton:hover {
+  background-color: #E68010;
+}
+
+.BackButton {
+  background-color: #FF9113;
+  color: #fff;
+  border: none;
+}
+
+.BackButton:hover {
+  background-color: #E68010;
+}
