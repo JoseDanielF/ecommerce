@@ -1,14 +1,11 @@
-const User = require('../models/userModel');
 const crypto = require('crypto');
 const pool = require('../../config/db');
-const nodemailer = require('nodemailer');
 const axios = require('axios');
 require('dotenv').config();
 
-
 exports.registerUser = async (req, res) => {
-    const { email, senha, nome, documento, telefone, tipousuarioid, endereco } = req.body;
-    if (!email || !senha || !nome || !documento || !telefone || !tipousuarioid || !endereco) {
+    const { email, senha, nome, documento, telefone, endereco } = req.body;
+    if (!email || !senha || !nome || !documento || !telefone || !endereco) {
         return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
     }
 
@@ -40,12 +37,12 @@ exports.registerUser = async (req, res) => {
             const enderecoId = enderecoResult.rows[0].id;
 
             const usuarioQuery = `
-                INSERT INTO usuario (email, senha, nome, telefone, tipousuarioid, documento, enderecoid)
-                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                INSERT INTO usuario (email, senha, nome, telefone, documento, enderecoid)
+                VALUES ($1, $2, $3, $4, $5, $6)
                 RETURNING *;
             `;
 
-            const userResult = await client.query(usuarioQuery, [email, senhaCriptografada, nome, telefone, tipousuarioid, documento, enderecoId]);
+            const userResult = await client.query(usuarioQuery, [email, senhaCriptografada, nome, telefone, documento, enderecoId]);
 
             await client.query('COMMIT');
 
@@ -82,8 +79,6 @@ exports.loginUser = async (req, res) => {
                 u.documento, 
                 u.telefone, 
                 u.deletado, 
-                u.tipousuarioid, 
-                t.nome AS tipoUsuario,
                 e.cep, 
                 e.logradouro, 
                 e.bairro, 
@@ -94,8 +89,6 @@ exports.loginUser = async (req, res) => {
                 e.cidade
             FROM 
                 usuario u
-            INNER JOIN 
-                tipousuario t ON u.tipousuarioid = t.id
             INNER JOIN 
                 endereco e ON u.enderecoid = e.id
             WHERE 
@@ -119,131 +112,6 @@ exports.loginUser = async (req, res) => {
     } catch (err) {
         console.error('Error:', err);
         return res.status(500).json({ error: 'Erro ao fazer login.' });
-    }
-};
-
-exports.sendEmailReset = async (req, res) => {
-    const { email } = req.body;
-    if (!email) {
-        return res.status(400).json({ error: 'Email é obrigatório' });
-    }
-
-    try {
-        const client = await pool.connect();
-
-        const queryText = `
-            SELECT *
-            FROM usuario
-            WHERE email = $1;
-        `;
-
-        const result = await client.query(queryText, [email]);
-
-        if (result.rows.length === 0) {
-            client.release();
-            return res.status(401).json({ error: 'Email não encontrado.' });
-        }
-
-        const token = crypto.createHash('md5').update(Math.random().toString()).digest('hex');
-        const dataValidade = new Date(Date.now() + 30 * 60 * 1000);
-
-        const queryInsertRecuperacao = `
-            INSERT INTO recuperarcredenciais (token, datavalidade, usuarioid)
-            VALUES ($1, $2, $3)
-            RETURNING *;
-        `;
-
-        const resultInsert = await client.query(queryInsertRecuperacao, [token, dataValidade, result.rows[0].id]);
-
-        const urlRedefinirSenha = `http://localhost:3000/redefinirSenha?token=${token}`;
-
-        const mailOptions = {
-            from: process.env.EMAIL_USER,
-            to: email,
-            subject: 'Recuperação de senha',
-            html: `
-                <div style="font-family: Arial, sans-serif; color: #333;">
-                    <h2 style="color: #4CAF50;">Recuperação de Senha</h2>
-                    <p>Você solicitou a recuperação de senha. Clique no botão abaixo para seguir com a redefinição:</p>
-                    <a href="${urlRedefinirSenha}" style="display: inline-block; padding: 10px 20px; font-size: 16px; color: white; background-color: #4CAF50; text-decoration: none; border-radius: 5px;">Redefinir Senha</a>
-                    <p style="margin-top: 20px;">Se você não solicitou esta recuperação, por favor ignore este e-mail.</p>
-                    <p>Atenciosamente,<br/>Sua Equipe de Suporte</p>
-                </div>
-            `
-        };
-
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.error('Erro ao enviar email:', error);
-                return res.status(500).json({ error: 'Erro ao enviar email de recuperação.' });
-            }
-            console.log('Email enviado:', info.response);
-            client.release();
-            return res.status(200).json(resultInsert.rows[0]);
-        });
-
-    } catch (err) {
-        console.error('Error:', err);
-        return res.status(500).json({ error: 'Erro ao solicitar recuperação de senha.' });
-    }
-};
-
-
-exports.resetPasswordUser = async (req, res) => {
-    const { senha, confirmacaoSenha, token } = req.body;
-
-    if (senha !== confirmacaoSenha) {
-        return res.status(400).json({ error: 'Senhas não coincidem.' });
-    }
-
-    try {
-        const client = await pool.connect();
-
-        const queryToken = `
-            SELECT *
-            FROM recuperarcredenciais
-            WHERE token = $1
-              AND datavalidade > NOW();
-        `;
-
-        const resultToken = await client.query(queryToken, [token]);
-
-        if (resultToken.rows.length === 0) {
-            client.release();
-            return res.status(401).json({ error: 'Token inválido ou expirado.' });
-        }
-
-        if (resultToken.rows[0].datautilizacao) {
-            client.release();
-            return res.status(400).json({ error: 'Token já utilizado.' });
-        }
-
-        const userId = resultToken.rows[0].usuarioid;
-
-        const senhaHash = crypto.createHash('md5').update(senha).digest('hex');
-
-        const queryUpdatePassword = `
-            UPDATE usuario
-            SET senha = $1
-            WHERE id = $2;
-        `;
-
-        await client.query(queryUpdatePassword, [senhaHash, userId]);
-
-        const queryUpdateDataUtilizacao = `
-            UPDATE recuperarcredenciais
-            SET datautilizacao = NOW()
-            WHERE token = $1;
-        `;
-
-        await client.query(queryUpdateDataUtilizacao, [token]);
-
-        client.release();
-
-        return res.status(200).json({ message: 'Senha atualizada com sucesso.' });
-    } catch (err) {
-        console.error('Error:', err);
-        return res.status(500).json({ error: 'Erro ao solicitar recuperação de senha.' });
     }
 };
 
