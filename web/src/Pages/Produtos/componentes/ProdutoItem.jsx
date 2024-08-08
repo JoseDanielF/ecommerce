@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Styles from './ProdutoItem.module.css';
 
 function ProdutoItem({ product }) {
-  let preco, valorDesconto, precoDesconto, name, description, gallery, hasDiscount;
+  let preco, valorDesconto, precoDesconto, name, description, gallery, hasDiscount, departamento, categoria, adjective, material;
 
   if (product.hasOwnProperty('details')) {
     preco = parseFloat(product.price);
@@ -13,6 +13,8 @@ function ProdutoItem({ product }) {
     description = product.description;
     gallery = product.gallery;
     hasDiscount = product.hasDiscount;
+    adjective = product.details.adjective;
+    material = product.details.material;
   } else if (product.hasOwnProperty('body')) {
     preco = parseFloat(product.preco);
     valorDesconto = 0;
@@ -20,25 +22,33 @@ function ProdutoItem({ product }) {
     name = product.nome;
     description = product.descricao;
     gallery = [product.imagem];
-    hasDiscount = false; 
+    hasDiscount = false;
+    adjective = null;
+    material = null;
   } else if (product.hasOwnProperty('nome') && product.hasOwnProperty('imagem')) {
     preco = parseFloat(product.preco);
-    valorDesconto = 0; 
+    valorDesconto = 0;
     precoDesconto = preco.toFixed(2);
     name = product.nome;
     description = product.descricao;
-    gallery = [product.imagem]; 
-    hasDiscount = false; 
+    gallery = [product.imagem];
+    hasDiscount = false;
+    adjective = null;
+    material = null;
   } else if (product.hasOwnProperty('categoria') && product.hasOwnProperty('departamento')) {
     preco = parseFloat(product.preco);
-    valorDesconto = 0; 
+    valorDesconto = 0;
     precoDesconto = preco.toFixed(2);
     name = product.nome;
     description = product.descricao;
-    gallery = [product.imagem]; 
-    hasDiscount = false; 
+    gallery = [product.imagem];
+    hasDiscount = false;
+    departamento = product.departamento;
+    categoria = product.categoria;
+    adjective = null;
+    material = null;
   } else {
-    return null; 
+    return null;
   }
 
   const truncateDescription = (description) => {
@@ -76,6 +86,10 @@ ProdutoItem.propTypes = {
     price: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     hasDiscount: PropTypes.bool,
     discountValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    details: PropTypes.shape({
+      adjective: PropTypes.string,
+      material: PropTypes.string,
+    }),
     // Type 2 and Type 3 specific props
     nome: PropTypes.string,
     descricao: PropTypes.string,
