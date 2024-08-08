@@ -9,6 +9,16 @@
   padding: 20px;
 }
 
+.mainContent {
+  padding-top: 60px;
+}
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
 .buttonContainer { 
   display: flex;
   justify-content: space-evenly;
@@ -31,4 +41,18 @@
 
 .BackButton:hover {
   background-color: #E68010;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+}
+
+.productCount {
+  font-size: 1.2em;
+  margin-top: 20px;
+  color: #FF9113;
 }
