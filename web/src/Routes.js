@@ -7,6 +7,7 @@ import Register from './Pages/Register/Register';
 import TelaPrincipal from './Pages/TelaPrincipal/TelaPrincipal';
 import UserProfile from './Pages/PerfilUsuario/PerfilUsuario';
 import Produtos from './Pages/Produtos/Produtos';
+import Carrinho from './Pages/Carrinho/Carrinho';
 
 const PrivateRoute = ({ element, ...rest }) => {
     const isAuthenticated = dadosUserLogadoService.getUserInfo() !== null;
@@ -30,6 +31,7 @@ const Routes = () => (
         <Route path='/telaPrincipal' element={<PrivateRoute element={<TelaPrincipal />} />} />
         <Route path='/perfil' element={<PrivateRoute element={<UserProfile />} />} />
         <Route path='/produtos' element={<PrivateRoute element={<Produtos />} />} />
+        <Route path='/carrinho' element={<PrivateRoute element={<Carrinho />} />} />
       </RouterRoutes>
     </BrowserRouter>
 );
