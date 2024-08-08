@@ -3,8 +3,6 @@ import axios from 'axios';
 const API_URL = 'http://localhost:4000/api';
 
 class RegisterService {
-
-
     async registerUser(userData) {
         try {
             const response = await axios.post(`${API_URL}/register`, userData, {

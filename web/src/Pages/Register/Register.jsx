@@ -47,7 +47,6 @@ const Register = () => {
     return senha.length >= minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar;
   };
 
-
   const alterarDados = (e) => {
     const { name, value } = e.target;
     setDadosCadastro((prevState) => {
@@ -288,7 +287,7 @@ const Register = () => {
                 <TextField
                   variant="outlined"
                   type="text"
-                  name="cidade"
+                  name="localidade"
                   label={
                     <span>
                       Cidade <span style={{ color: 'red' }}>*</span>
@@ -297,7 +296,7 @@ const Register = () => {
                   value={dadosEndereco.localidade}
                   onChange={alterarDadosEndereco}
                   fullWidth
-                  id="cidade"
+                  id="localidade"
                 />
               </Grid>
 
