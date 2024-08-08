@@ -9,11 +9,6 @@
   padding: 20px;
 }
 
-.UserProfileContainer h2 {
-  margin-bottom: 30px;
-  text-align: center;
-}
-
 .paper {
   padding: 20px;
   margin: 20px;
@@ -68,4 +63,8 @@
 
 .BackButton:hover {
   background-color: #E68010;
+}
+
+.mainContent {
+  padding-top: 60px;
 }

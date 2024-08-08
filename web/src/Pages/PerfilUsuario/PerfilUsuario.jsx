@@ -119,6 +119,9 @@ const UserProfile = () => {
   return (
     <div className={Styles.UserProfileContainer}>
       <Header />
+      <div className={Styles.mainContent}>
+        <h1>Perfil</h1>
+      </div>
 
       <Dialog
         aria-labelledby="customized-dialog-title"
