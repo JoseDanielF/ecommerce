@@ -8,6 +8,20 @@
   align-items: center;
   padding: 10px;
 }
+
+.title {
+  text-align: center;
+  padding: 20px;
+}
+
+.paper {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 100%;
+  max-width: 1000px;
+}
  
 .passwordCriteria {
   margin-bottom: 10px;
@@ -39,16 +53,6 @@
   .registerHeader .logo {
     margin-bottom: 5px;
   }
-}
-
-.registerForm {
-  background-color: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 350px;
-  box-sizing: border-box;
 }
 
 .tabs {
@@ -137,6 +141,12 @@
 
 .passwordTooltip {
   color: black;
+}
 
+.buttonContainer { 
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
 }
 

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from "./Register.module.css";
 import logo from "../../Assets/logo.png";
-import { cpf, cnpj } from 'cpf-cnpj-validator';
 import {
   TextField, Grid, Paper
 } from '@material-ui/core';
