@@ -13,6 +13,10 @@ const Header = () => {
     navigate('/perfil');
   };
 
+  const goToCarrinho = () => {
+    navigate('/carrinho');
+  };
+
   const realizarLogout = () => {
     dadosUserLogadoService.logOut();
     navigate('/login');
@@ -25,7 +29,7 @@ const Header = () => {
         <div className={Styles.iconBox} onClick={goToProfile}>
           <FaUserCircle className={Styles.profileIcon} />
         </div>
-        <div className={Styles.iconBox}>
+        <div className={Styles.iconBox} onClick={goToCarrinho}>
           <FaShoppingCart className={Styles.profileIcon} />
           {cartItemCount > 0 && (
             <div className={Styles.cartCount}>{cartItemCount}</div>
