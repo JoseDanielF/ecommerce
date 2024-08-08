@@ -90,12 +90,10 @@ ProdutoItem.propTypes = {
       adjective: PropTypes.string,
       material: PropTypes.string,
     }),
-    // Type 2 and Type 3 specific props
     nome: PropTypes.string,
     descricao: PropTypes.string,
     imagem: PropTypes.string,
     preco: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    // Type 4 specific props
     categoria: PropTypes.string,
     departamento: PropTypes.string,
     email: PropTypes.string,

@@ -134,14 +134,6 @@
   margin-top: 20px;
 }
 
-.BackButton {
-  background-color: #FF9113;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
 .BackButton:disabled {
   background-color: #ccc;
   cursor: not-allowed;
