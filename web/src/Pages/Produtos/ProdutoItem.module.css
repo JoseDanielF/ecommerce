@@ -1,0 +1,46 @@
+.productItem {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  text-align: center;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  color: #333; /* Aumenta o contraste do texto */
+}
+
+.productImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin: 0.5em 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+p {
+  font-size: 1em;
+  margin: 0.5em 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); 
+}
+
+.productPrice {
+  font-size: 1.2em;
+  color: #333;
+}
+
+.precoDesconto {
+  color: red;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #888;
+}
