@@ -261,3 +261,34 @@ exports.consultCep = async (req, res) => {
         res.status(500).json({ error: 'Failed to fetch CEP information', message: err.message });
     }
 };
+
+exports.getAllProducts = async (req, res) => {
+    try {
+        const europeanResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider`);
+        const brazilianResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider`);
+
+        const combinedProducts = [...europeanResponse.data, ...brazilianResponse.data];
+
+        res.json(combinedProducts);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to get products', message: err.message });
+    }
+};
+
+exports.getProductByID = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const europeanResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider/${id}`);
+        const brazilianResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${id}`);
+
+        const combinedProduct = {
+            europeanProvider: europeanResponse.data,
+            brazilianProvider: brazilianResponse.data,
+        };
+
+        res.json(combinedProduct);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to get products', message: err.message });
+    }
+};
