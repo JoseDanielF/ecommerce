@@ -13,14 +13,15 @@ function Carrinho() {
   };
 
   return (
-    <div className={Styles.TelaPrincipalContainer}>
+    <>
       <Header />
-      <div className={Styles.mainContent}>
-        <h1>Carrinho</h1>
-      </div>
+      <div className={Styles.TelaPrincipalContainer}>
+        <div className={Styles.mainContent}>
+          <h1>Carrinho</h1>
+        </div>
 
-      <Paper className={Styles.paper}>
-        {/* {carregando ? (
+        <Paper className={Styles.paper}>
+          {/* {carregando ? (
           <div className={Styles.loading}>
             <CircularProgress />
             <p>Carregando...</p>
@@ -30,13 +31,14 @@ function Carrinho() {
            Opa
           </>
         )} */}
-      </Paper>
-      <div className={Styles.buttonContainer}>
-        <button type="button" className={Styles.BackButton} onClick={handleVoltar}>
-          Voltar
-        </button>
+        </Paper>
+        <div className={Styles.buttonContainer}>
+          <button type="button" className={Styles.BackButton} onClick={handleVoltar}>
+            Voltar
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

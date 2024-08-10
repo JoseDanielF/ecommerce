@@ -15,16 +15,22 @@ function TelaPrincipal() {
   };
 
   return (
-    <div className={Styles.TelaPrincipalContainer}>
+    <>
       <Header />
-      <div className={Styles.mainContent}>
-        <h1>Bem Vindo</h1>
+      <div className={Styles.TelaPrincipalContainer}>
+        <div className={Styles.mainContent}>
+          <h1>Bem Vindo</h1>
+        </div>
+        <div className={Styles.buttonContainer}>
+          <button type="button" className={Styles.BackButton} onClick={handleProdutos}>
+            Produtos
+          </button>
+          <button type="button" className={Styles.BackButton} onClick={handleCarrinho}>
+            Carrinho
+          </button>
+        </div>
       </div>
-      <div className={Styles.buttonContainer}>
-        <button type="button" className={Styles.BackButton} onClick={handleProdutos}>Produtos</button>
-        <button type="button" className={Styles.BackButton} onClick={handleCarrinho}>Carrinho</button>
-      </div>
-    </div>
+    </>
   );
 }
 

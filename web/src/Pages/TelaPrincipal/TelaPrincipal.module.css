@@ -1,19 +1,24 @@
 .TelaPrincipalContainer {
   background-color: #1C4839;
   color: white;
-  min-height: 100vh;
+  height: 100vh;
+  padding: 0 80px 40px;
+}
+
+.mainContent {
+  margin: 60px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 }
 
-.buttonContainer { 
+.buttonContainer {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   margin-top: 20px;
+  padding: 0 20px;
 }
 
 .BackButton {
@@ -21,12 +26,13 @@
   color: #fff;
   border: none;
   padding: 15px 30px;
-  font-size: 18px; 
+  font-size: 18px;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30%;
 }
 
 .BackButton:hover {

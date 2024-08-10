@@ -16,7 +16,7 @@ function Produtos() {
   const [produtosFiltrados, setProdutosFiltrados] = useState([]);
   const [termoBusca, setTermoBusca] = useState('');
   const [categoria, setCategoria] = useState('');
-  const [tipoFiltro, setTipoFiltro] = useState('category');
+  const [departamento, setDepartamento] = useState('');
   const [categorias, setCategorias] = useState([]);
   const [departamentos, setDepartamentos] = useState([]);
   const [paginaAtual, setPaginaAtual] = useState(1);
@@ -74,25 +74,25 @@ function Produtos() {
     }
 
     if (categoria) {
-      if (tipoFiltro === 'category') {
-        filtrados = filtrados.filter(produto =>
-          (produto.category && produto.category === categoria) ||
-          (produto.categoria && produto.categoria === categoria)
-        );
-      } else if (tipoFiltro === 'department') {
-        filtrados = filtrados.filter(produto =>
-          produto.departamento && produto.departamento === categoria
-        );
-      }
+      filtrados = filtrados.filter(produto =>
+        (produto.category && produto.category === categoria) ||
+        (produto.categoria && produto.categoria === categoria)
+      );
+    }
+
+    if (departamento) {
+      filtrados = filtrados.filter(produto =>
+        produto.departamento && produto.departamento === departamento
+      );
     }
 
     setProdutosFiltrados(filtrados);
     setPaginaAtual(1);
-  }, [produtos, termoBusca, categoria, tipoFiltro]);
+  }, [produtos, termoBusca, categoria, departamento]);
 
   useEffect(() => {
     filtrarProdutos();
-  }, [termoBusca, categoria, filtrarProdutos]);
+  }, [termoBusca, categoria, departamento, filtrarProdutos]);
 
   useEffect(() => {
     setPaginaAtual(1);
@@ -116,113 +116,112 @@ function Produtos() {
   const fimExibicao = Math.min(paginaAtual * itensPorPagina, totalProdutos);
 
   return (
-    <div className={Styles.TelaPrincipalContainer}>
+    <>
       <Header />
-      <div className={Styles.mainContent}>
-        <h1>Produtos</h1>
-        <div className={Styles.filterContainer}>
-          <input
-            type="text"
-            placeholder="Buscar produtos..."
-            value={termoBusca}
-            onChange={(e) => setTermoBusca(e.target.value)}
-            className={Styles.searchBar}
-            disabled={carregando}
-          />
-          <div className={Styles.filterOptions}>
-            <button
-              type="button"
-              className={Styles.filterButton}
-              onClick={() => setTipoFiltro(tipoFiltro === 'category' ? 'department' : 'category')}
+      <div className={Styles.TelaPrincipalContainer}>
+        <div className={Styles.mainContent}>
+          <h1>Produtos</h1>
+          <div className={Styles.filterContainer}>
+            <input
+              type="text"
+              placeholder="Buscar produtos..."
+              value={termoBusca}
+              onChange={(e) => setTermoBusca(e.target.value)}
+              className={Styles.searchBar}
               disabled={carregando}
-            >
-              Filtrar por: {tipoFiltro === 'category' ? 'Categorias' : 'Departamentos'}
-            </button>
-            <select
-              value={categoria}
-              onChange={(e) => setCategoria(e.target.value)}
-              className={Styles.filterSelect}
-              disabled={carregando}
-            >
-              <option value="">Todas as {tipoFiltro === 'category' ? 'Categorias' : 'Departamentos'}</option>
-              {tipoFiltro === 'category' ? (
-                categorias.map(cat => (
+            />
+            <div className={Styles.filterOptions}>
+              <select
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+                className={Styles.filterSelect}
+                disabled={carregando}
+              >
+                <option value="">Todas as Categorias</option>
+                {categorias.map(cat => (
                   <option key={cat} value={cat}>{cat}</option>
-                ))
-              ) : (
-                departamentos.map(dep => (
+                ))}
+              </select>
+              <select
+                value={departamento}
+                onChange={(e) => setDepartamento(e.target.value)}
+                className={Styles.filterSelect}
+                disabled={carregando}
+              >
+                <option value="">Todos os Departamentos</option>
+                {departamentos.map(dep => (
                   <option key={dep} value={dep}>{dep}</option>
-                ))
-              )}
-            </select>
-          </div>
-        </div>
-        <Paper className={Styles.paper}>
-          {carregando ? (
-            <div className={Styles.loading}>
-              <CircularProgress />
-              <p>Carregando...</p>
+                ))}
+              </select>
             </div>
-          ) : (
-            <>
-              <div className={Styles.paginationControls}>
-                <label htmlFor="itemsPerPage">Itens por página:</label>
-                <select
-                  id="itemsPerPage"
-                  value={itensPorPagina}
-                  onChange={(e) => setItensPorPagina(Number(e.target.value))}
-                  disabled={carregando}
-                >
-                  <option value={10}>10</option>
-                  <option value={25}>25</option>
-                  <option value={50}>50</option>
-                </select>
-                <p className={Styles.productCount}>
-                  {inicioExibicao}-{fimExibicao} de {totalProdutos}
-                </p>
+          </div>
+          <Paper className={Styles.paper}>
+            {carregando ? (
+              <div className={Styles.loading}>
+                <CircularProgress />
+                <p>Carregando...</p>
               </div>
-              <div className={Styles.gallery}>
-                {produtosFiltrados.length > 0 ? (
-                  produtosPaginados.length > 0 ? (
-                    produtosPaginados.map((produto) => (
-                      <ProdutoItem key={produto.id} product={produto} />
-                    ))
+            ) : (
+              <>
+                <div className={Styles.paginationControls}>
+                  <label htmlFor="itemsPerPage">Itens por página:</label>
+                  <select
+                    id="itemsPerPage"
+                    value={itensPorPagina}
+                    onChange={(e) => setItensPorPagina(Number(e.target.value))}
+                    disabled={carregando}
+                  >
+                    <option value={10}>10</option>
+                    <option value={25}>25</option>
+                    <option value={50}>50</option>
+                  </select>
+                  <p className={Styles.productCount}>
+                    {inicioExibicao}-{fimExibicao} de {totalProdutos}
+                  </p>
+                </div>
+                <div className={Styles.gallery}>
+                  {produtosFiltrados.length > 0 ? (
+                    produtosPaginados.length > 0 ? (
+                      produtosPaginados.map((produto) => (
+                        <ProdutoItem key={produto.id} product={produto} />
+                      ))
+                    ) : (
+                      <p className={Styles.noProductsMessage}>Nenhum produto encontrado</p>
+                    )
                   ) : (
                     <p className={Styles.noProductsMessage}>Nenhum produto encontrado</p>
-                  )
-                ) : (
-                  <p className={Styles.noProductsMessage}>Nenhum produto encontrado</p>
-                )}
-              </div>
-            </>
-          )}
-        </Paper>
-        <div className={Styles.paginationContainer}>
-          <button
-            type="button"
-            className={Styles.BackButton}
-            onClick={handlePaginaAnterior}
-            disabled={carregando || paginaAtual === 1}
-          >
-            Página Anterior
-          </button>
+                  )}
+                </div>
+              </>
+            )}
+          </Paper>
+          <div className={Styles.paginationContainer}>
+            <button
+              type="button"
+              className={Styles.BackButton}
+              onClick={handlePaginaAnterior}
+              disabled={carregando || paginaAtual === 1}
+            >
+              Página Anterior
+            </button>
 
-          <button
-            type="button"
-            className={Styles.BackButton}
-            onClick={handleProximaPagina}
-            disabled={carregando || fimExibicao >= totalProdutos}
-          >
-            Próxima Página
+            <button
+              type="button"
+              className={Styles.BackButton}
+              onClick={handleProximaPagina}
+              disabled={carregando || fimExibicao >= totalProdutos}
+            >
+              Próxima Página
+            </button>
+          </div>
+        </div>
+        <div className={Styles.buttonContainer}>
+          <button type="button" className={Styles.BackButton} onClick={handleVoltar} disabled={carregando}>
+            Voltar
           </button>
         </div>
       </div>
-      <div className={Styles.buttonContainer}>
-        <button type="button" className={Styles.BackButton} onClick={handleVoltar} disabled={carregando}>
-          Voltar
-        </button>
-      </div>
-    </div>
+    </>
   );
 }
 

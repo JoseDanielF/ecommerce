@@ -13,10 +13,10 @@ const UserProfile = () => {
   const [formData, setFormData] = useState({
     email: dadosUserLogadoService.getUserInfo().email,
     nome: dadosUserLogadoService.getUserInfo().nome,
-    documento: dadosUserLogadoService.getUserInfo().documento,    
+    documento: dadosUserLogadoService.getUserInfo().documento,
     telefone: dadosUserLogadoService.getUserInfo().telefone,
     enderecoId: dadosUserLogadoService.getUserInfo().enderecoid,
-    endereco:{
+    endereco: {
       cep: dadosUserLogadoService.getUserInfo().cep,
       cidade: dadosUserLogadoService.getUserInfo().cidade,
       bairro: dadosUserLogadoService.getUserInfo().bairro,
@@ -26,7 +26,7 @@ const UserProfile = () => {
       numero: dadosUserLogadoService.getUserInfo().numero,
       logradouro: dadosUserLogadoService.getUserInfo().logradouro,
     }
-    
+
   });
   const navigate = useNavigate();
   const [showConfirmPopup, setShowConfirmPopup] = useState(false);
@@ -54,7 +54,7 @@ const UserProfile = () => {
   const verificarCamposPreenchidos = (dados) => {
     const camposObrigatorios = [
       'email', 'nome', 'documento', 'telefone',
-      'endereco.cep', 'endereco.cidade', 'endereco.bairro', 
+      'endereco.cep', 'endereco.cidade', 'endereco.bairro',
       'endereco.uf', 'endereco.pais', 'endereco.logradouro'
     ];
 
@@ -68,7 +68,6 @@ const UserProfile = () => {
   };
 
   const editarDados = async (e) => {
-    e.preventDefault();
 
     if (!verificarCamposPreenchidos(formData)) {
       alert('Todos os campos obrigatórios devem ser preenchidos.');
@@ -117,66 +116,66 @@ const UserProfile = () => {
   };
 
   return (
-    <div className={Styles.UserProfileContainer}>
+    <>
       <Header />
-      <div className={Styles.mainContent}>
-        <h1>Perfil</h1>
-      </div>
+      <div className={Styles.TelaPrincipalContainer}>
+        <div className={Styles.mainContent}>
+          <h1>Perfil</h1>
+        </div>
 
-      <Dialog
-        aria-labelledby="customized-dialog-title"
-        open={showConfirmPopup}
-        onClose={() => setShowConfirmPopup(false)}
-        style={{ marginTop: 35, marginBottom: 10 }}
-        disableBackdropClick
-        fullWidth
-        maxWidth="sm"
-      >
-        <DialogTitle>
-          <Grid container alignItems="center">
-            <Grid item xs={10} sm={11}>
-              Confirmação de Senha
+        <Dialog
+          aria-labelledby="customized-dialog-title"
+          open={showConfirmPopup}
+          onClose={() => setShowConfirmPopup(false)}
+          style={{ marginTop: 35, marginBottom: 10 }}
+          disableBackdropClick
+          fullWidth
+          maxWidth="sm"
+        >
+          <DialogTitle>
+            <Grid container alignItems="center">
+              <Grid item xs={10} sm={11}>
+                Confirmação de Senha
+              </Grid>
+              <Grid item xs={2} sm={1}>
+                <IconButton onClick={() => setShowConfirmPopup(false)}>
+                  x
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item xs={2} sm={1}>
-              <IconButton onClick={() => setShowConfirmPopup(false)}>
-                x
-              </IconButton>
-            </Grid>
-          </Grid>
-        </DialogTitle>
-        <DialogContent dividers>
-          <Grid item xs={12} sm={12}>
+          </DialogTitle>
+          <DialogContent dividers>
             <Grid item xs={12} sm={12}>
-              <DialogContentText>
-                Informe sua senha:
-              </DialogContentText>
-              <TextField
-                id="password"
-                label={<span>Senha <span style={{ color: 'red' }}> *</span></span>}
-                type="password"
-                placeholder='Senha'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                InputLabelProps={{
-                  shrink: true,
-                }}
-                variant="outlined"
-                fullWidth
-              />
+              <Grid item xs={12} sm={12}>
+                <DialogContentText>
+                  Informe sua senha:
+                </DialogContentText>
+                <TextField
+                  id="password"
+                  label={<span>Senha <span style={{ color: 'red' }}> *</span></span>}
+                  type="password"
+                  placeholder='Senha'
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  variant="outlined"
+                  fullWidth
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </DialogContent>
+          </DialogContent>
 
-        <DialogActions style={{ justifyContent: 'space-around' }}>
-          <button type="button" className={Styles.BackButton} onClick={() => setShowConfirmPopup(false)}>Cancelar</button>
-          <button type="button" className={Styles.BackButton} onClick={confirmarDelecao}>Confirmar</button>
-        </DialogActions>
-      </Dialog>
+          <DialogActions style={{ justifyContent: 'space-around' }}>
+            <button type="button" className={Styles.BackButton} onClick={() => setShowConfirmPopup(false)}>Cancelar</button>
+            <button type="button" className={Styles.BackButton} onClick={confirmarDelecao}>Confirmar</button>
+          </DialogActions>
+        </Dialog>
 
-      <Paper className={Styles.paper}>
-        <h2 className={Styles.title}>Perfil do Usuário</h2>
-        <h4 className={Styles.title}>Dados Pessoais</h4>
-        <form onSubmit={editarDados}>
+        <Paper className={Styles.paper}>
+          <h2 className={Styles.title}>Perfil do Usuário</h2>
+          <h4 className={Styles.title}>Dados Pessoais</h4>
           <div className={Styles.form}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -378,15 +377,15 @@ const UserProfile = () => {
               </Grid>
             </Grid>
           </div>
-          <div className={Styles.buttonContainer}>
-            <button type="button" className={Styles.BackButton} onClick={() => setShowConfirmPopup(true)}>Deletar Conta</button>
-            <button type="submit" className={Styles.SaveButton}>Salvar</button>
-            <button type="button" className={Styles.BackButton} onClick={handleBack}>Voltar</button>
-          </div>
-        </form>
-      </Paper>
+        </Paper>
 
-    </div>
+        <div className={Styles.buttonContainer}>
+          <button type="button" className={Styles.BackButton} onClick={() => setShowConfirmPopup(true)}>Deletar Conta</button>
+          <button type="submit" className={Styles.SaveButton} onClick={() => editarDados()}>Salvar</button>
+          <button type="button" className={Styles.BackButton} onClick={handleBack}>Voltar</button>
+        </div>
+      </div>
+    </>
   );
 }
 

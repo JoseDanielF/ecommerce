@@ -1,21 +1,28 @@
-.UserProfileContainer {
+.TelaPrincipalContainer {
   background-color: #1C4839;
   color: white;
   min-height: 100vh;
+  padding: 0 80px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  margin: 60px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  width: 100%;
 }
 
 .paper {
   padding: 20px;
-  margin: 20px;
   border: 1px solid #ccc;
   border-radius: 30px !important;
   width: 100%;
-  max-width: 1000px;
+  margin-left: -24px;
 }
 
 .title {
@@ -28,21 +35,23 @@
   flex-direction: column;
 }
 
-.buttonContainer { 
+.buttonContainer {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   margin-top: 20px;
+  flex-direction: row;
 }
 
-.SaveButton, .BackButton { 
+.SaveButton, .BackButton {
   padding: 15px 30px;
-  font-size: 18px; 
+  font-size: 18px;
   border-radius: 10px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 30%;
 }
 
 .SaveButton {
@@ -59,12 +68,27 @@
   background-color: #FF9113;
   color: #fff;
   border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
 }
-
 .BackButton:hover {
   background-color: #E68010;
 }
 
-.mainContent {
-  padding-top: 60px;
+@media (max-width: 768px) {
+  .buttonContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .SaveButton, .BackButton {
+    width: 80%;
+    margin-bottom: 10px;
+  }
 }
