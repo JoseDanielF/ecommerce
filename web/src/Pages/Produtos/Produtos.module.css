@@ -10,7 +10,7 @@
 }
 
 .mainContent {
-  padding-top: 60px;
+  margin: 60px;
 }
 
 .productGrid {
@@ -143,6 +143,8 @@
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  justify-content: space-between; /* Add this line */
+  width: 100%; /* Ensure it spans full width */
 }
 
 .paginationControls label {
@@ -151,4 +153,11 @@
 
 .paginationControls select {
   padding: 5px;
+  margin-right: auto; /* Add this to push the select to the left */
+}
+
+.productCount {
+  margin-left: auto; /* Align item count to the right */
+  font-size: 1.2em;
+  color: #FF9113;
 }

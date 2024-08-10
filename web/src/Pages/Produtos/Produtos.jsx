@@ -64,21 +64,26 @@ function Produtos() {
     let filtrados = [...produtos];
 
     if (termoBusca) {
+      const termoLower = termoBusca.toLowerCase();
       filtrados = filtrados.filter(produto =>
-        (produto.name && produto.name.toLowerCase().includes(termoBusca.toLowerCase())) ||
-        (produto.nome && produto.nome.toLowerCase().includes(termoBusca.toLowerCase())) ||
-        (produto.description && produto.description.toLowerCase().includes(termoBusca.toLowerCase())) ||
-        (produto.descricao && produto.descricao.toLowerCase().includes(termoBusca.toLowerCase()))
+        (produto.name && produto.name.toLowerCase().includes(termoLower)) ||
+        (produto.nome && produto.nome.toLowerCase().includes(termoLower)) ||
+        (produto.description && produto.description.toLowerCase().includes(termoLower)) ||
+        (produto.descricao && produto.descricao.toLowerCase().includes(termoLower))
       );
     }
 
     if (categoria) {
-      filtrados = filtrados.filter(produto =>
-        (tipoFiltro === 'category' &&
-          ((produto.category && produto.category === categoria) ||
-            (produto.categoria && produto.categoria === categoria))) ||
-        (tipoFiltro === 'department' && produto.departamento && produto.departamento === categoria)
-      );
+      if (tipoFiltro === 'category') {
+        filtrados = filtrados.filter(produto =>
+          (produto.category && produto.category === categoria) ||
+          (produto.categoria && produto.categoria === categoria)
+        );
+      } else if (tipoFiltro === 'department') {
+        filtrados = filtrados.filter(produto =>
+          produto.departamento && produto.departamento === categoria
+        );
+      }
     }
 
     setProdutosFiltrados(filtrados);
@@ -88,6 +93,10 @@ function Produtos() {
   useEffect(() => {
     filtrarProdutos();
   }, [termoBusca, categoria, filtrarProdutos]);
+
+  useEffect(() => {
+    setPaginaAtual(1);
+  }, [itensPorPagina]);
 
   const produtosPaginados = produtosFiltrados.slice(
     (paginaAtual - 1) * itensPorPagina,
@@ -101,6 +110,10 @@ function Produtos() {
   const handlePaginaAnterior = () => {
     setPaginaAtual((prevPage) => Math.max(prevPage - 1, 1));
   };
+
+  const totalProdutos = produtosFiltrados.length;
+  const inicioExibicao = (paginaAtual - 1) * itensPorPagina + 1;
+  const fimExibicao = Math.min(paginaAtual * itensPorPagina, totalProdutos);
 
   return (
     <div className={Styles.TelaPrincipalContainer}>
@@ -160,18 +173,23 @@ function Produtos() {
                   onChange={(e) => setItensPorPagina(Number(e.target.value))}
                   disabled={carregando}
                 >
-                  <option value={5}>5</option>
                   <option value={10}>10</option>
                   <option value={25}>25</option>
                   <option value={50}>50</option>
-                  <option value={100}>100</option>
                 </select>
+                <p className={Styles.productCount}>
+                  {inicioExibicao}-{fimExibicao} de {totalProdutos}
+                </p>
               </div>
               <div className={Styles.gallery}>
-                {produtosPaginados.length > 0 ? (
-                  produtosPaginados.map((produto) => (
-                    <ProdutoItem key={produto.id} product={produto} />
-                  ))
+                {produtosFiltrados.length > 0 ? (
+                  produtosPaginados.length > 0 ? (
+                    produtosPaginados.map((produto) => (
+                      <ProdutoItem key={produto.id} product={produto} />
+                    ))
+                  ) : (
+                    <p className={Styles.noProductsMessage}>Nenhum produto encontrado</p>
+                  )
                 ) : (
                   <p className={Styles.noProductsMessage}>Nenhum produto encontrado</p>
                 )}
@@ -180,20 +198,24 @@ function Produtos() {
           )}
         </Paper>
         <div className={Styles.paginationContainer}>
-          <button type="button" className={Styles.BackButton}
+          <button
+            type="button"
+            className={Styles.BackButton}
             onClick={handlePaginaAnterior}
             disabled={carregando || paginaAtual === 1}
           >
             Página Anterior
           </button>
-          <button type="button" className={Styles.BackButton}
+
+          <button
+            type="button"
+            className={Styles.BackButton}
             onClick={handleProximaPagina}
-            disabled={carregando || produtosPaginados.length < itensPorPagina}
+            disabled={carregando || fimExibicao >= totalProdutos}
           >
             Próxima Página
           </button>
         </div>
-        {/* <p className={Styles.productCount}>Total de produtos: {produtosFiltrados.length}</p> */}
       </div>
       <div className={Styles.buttonContainer}>
         <button type="button" className={Styles.BackButton} onClick={handleVoltar} disabled={carregando}>
