@@ -10,6 +10,10 @@ function TelaPrincipal() {
     navigate('/produtos');
   };
 
+  const handlePedidos = () => {
+    navigate('/pedidos');
+  };
+  
   const handleCarrinho = () => {
     navigate('/carrinho');
   };
@@ -24,6 +28,9 @@ function TelaPrincipal() {
         <div className={Styles.buttonContainer}>
           <button type="button" className={Styles.BackButton} onClick={handleProdutos}>
             Produtos
+          </button>
+          <button type="button" className={Styles.BackButton} onClick={handlePedidos}>
+            Pedidos
           </button>
           <button type="button" className={Styles.BackButton} onClick={handleCarrinho}>
             Carrinho
