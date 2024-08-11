@@ -3,7 +3,7 @@
   color: white;
   min-height: 100vh;
   padding: 0 80px 40px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
@@ -17,7 +17,39 @@
   width: 100%;
 }
 
-.BackButton {
+.paper {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 100%;
+  max-width: 800px;
+}
+
+.cartItem {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.cartItemImage {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.cartItemDetails {
+  flex-grow: 1;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.Button {
   background-color: #FF9113;
   color: #fff;
   border: none;
@@ -28,38 +60,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  transition: background-color 0.3s ease;
 }
 
-.buttonContainer { 
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.BackButton:hover {
+.Button:hover {
   background-color: #E68010;
 }
 
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-}
-
-.loading p {
-  margin-top: 10px;
-  font-size: 1em;
-  color: #333;
-}
-
-.paper {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 30px !important;
-  width: 100%;
-  margin-left: -24px;
+.Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
