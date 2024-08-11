@@ -292,3 +292,61 @@ exports.getProductByID = async (req, res) => {
         res.status(500).json({ error: 'Failed to get products', message: err.message });
     }
 };
+
+exports.registerBuy = async (req, res) => {
+    const { idUsuario, idProduto, preco, quantidade, fornecedor } = req.body;
+    if (!idUsuario || !idProduto || !preco || !quantidade || !fornecedor) {
+        return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
+    }
+
+    try {
+        const client = await pool.connect();
+
+        try {
+            await client.query('BEGIN');
+
+            const insertQuery = `
+                INSERT INTO pedidos (idusuario, idproduto, preco, quantidade, fornecedor, datapedido)
+                VALUES ($1, $2, $3, $4, $5, NOW())
+                RETURNING id;
+            `;
+
+            const buyResult = await client.query(insertQuery, [idUsuario, idProduto, preco, quantidade, fornecedor]);
+
+            await client.query('COMMIT');
+
+            return res.status(201).json(buyResult.rows[0]);
+        } catch (err) {
+            await client.query('ROLLBACK');
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao cadastrar compra.' });
+        } finally {
+            client.release();
+        }
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Erro ao conectar ao banco de dados' });
+    }
+};
+
+exports.getAllBuys = async (req, res) => {
+    try {
+        const client = await pool.connect();
+
+        const queryText = `
+          SELECT * FROM pedidos 
+        `;
+
+        const result = await client.query(queryText);
+        client.release();
+
+        if (result.rows.length === 0) {
+            return res.status(401).json({ error: 'Não foram encontrados pedidos.' });
+        }
+
+        return res.status(200).json(result.rows);
+    } catch (err) {
+        console.error('Error:', err);
+        return res.status(500).json({ error: 'Erro ao buscar pedidos.' });
+    }
+};
