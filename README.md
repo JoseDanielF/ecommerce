@@ -27,27 +27,21 @@ Inicial
     git clone https://github.com/JoseDanielF/ecommerce.git
     ```
 
-2. Navegue até a pasta do projeto:
-
-    ```bash
-    cd ecommerce
-    ```
-
-3. Entre na pasta `web` e instale as dependências:
+2. Entre na pasta `web` e instale as dependências:
 
     ```bash
     cd web
     yarn install
     ```
 
-4. Em outra aba ou terminal, entre na pasta `api` e instale as dependências:
+3. Em outra aba ou terminal, entre na pasta `api` e instale as dependências:
 
     ```bash
     cd api
     yarn install
     ```
 
-5. Para iniciar a aplicação, abra dois terminais:
+4. Para iniciar a aplicação, abra dois terminais:
 
     - No primeiro terminal, inicie o front-end:
 
@@ -65,7 +59,7 @@ Inicial
 
 ## :floppy_disk: Banco de Dados
 
-O banco de dados utilizado é o **PostgreSQL**. Você pode visualizar o modelo entidade-relacionamento (MER) através [deste link](https://lucid.app/lucidchart/b816203a-1321-471c-84cb-d29119172625/edit?invitationId=inv_b2932ffa-e1d2-4fd4-b8c8-035cfa32d5b5).
+O banco de dados utilizado é o **PostgreSQL**. Modelo entidade-relacionamento (MER) através [deste link](https://lucid.app/lucidchart/b816203a-1321-471c-84cb-d29119172625/edit?invitationId=inv_b2932ffa-e1d2-4fd4-b8c8-035cfa32d5b5).
 
 ### Script SQL para Criação do Banco de Dados
 
