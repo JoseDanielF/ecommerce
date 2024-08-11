@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import Styles from './ProdutoItem.module.css';
 
 function ProdutoItem({ product }) {
-  let preco, valorDesconto, precoDesconto, name, description, gallery, hasDiscount, departamento, categoria, adjective, material;
+  const navigate = useNavigate();
+
+  let preco, valorDesconto, precoDesconto, name, description, gallery, hasDiscount, departamento, categoria, adjective, material, dataOrigin;
 
   if (product.hasOwnProperty('details')) {
     preco = parseFloat(product.price);
@@ -15,6 +18,7 @@ function ProdutoItem({ product }) {
     hasDiscount = product.hasDiscount;
     adjective = product.details.adjective;
     material = product.details.material;
+    dataOrigin = 'european';
   } else if (product.hasOwnProperty('body')) {
     preco = parseFloat(product.preco);
     valorDesconto = 0;
@@ -25,6 +29,7 @@ function ProdutoItem({ product }) {
     hasDiscount = false;
     adjective = null;
     material = null;
+    dataOrigin = 'brazilian';
   } else if (product.hasOwnProperty('nome') && product.hasOwnProperty('imagem')) {
     preco = parseFloat(product.preco);
     valorDesconto = 0;
@@ -35,6 +40,7 @@ function ProdutoItem({ product }) {
     hasDiscount = false;
     adjective = null;
     material = null;
+    dataOrigin = 'brazilian';
   } else if (product.hasOwnProperty('categoria') && product.hasOwnProperty('departamento')) {
     preco = parseFloat(product.preco);
     valorDesconto = 0;
@@ -47,6 +53,7 @@ function ProdutoItem({ product }) {
     categoria = product.categoria;
     adjective = null;
     material = null;
+    dataOrigin = 'brazilian';
   } else {
     return null;
   }
@@ -58,8 +65,12 @@ function ProdutoItem({ product }) {
       : description;
   };
 
+  const handleClick = () => {
+    navigate(`/produto/${product.id}/${dataOrigin === 'brazilian' ? 'br' : 'eu'}`);
+  };
+
   return (
-    <div className={Styles.productItem}>
+    <div className={Styles.productItem} onClick={handleClick}>
       <img src={gallery[0]} alt={name} className={Styles.productImage} />
       <h2>{name}</h2>
       <p>{truncateDescription(description)}</p>
@@ -73,6 +84,7 @@ function ProdutoItem({ product }) {
           <span>${preco.toFixed(2)}</span>
         )}
       </p>
+      <p className={Styles.dataOrigin}>Origin: {dataOrigin}</p>
     </div>
   );
 }
