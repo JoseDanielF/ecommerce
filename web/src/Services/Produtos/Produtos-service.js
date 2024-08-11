@@ -26,7 +26,7 @@ class ProdutosService {
 
     async getProductByID(idProduct) {
         try {
-            const response = await axios.put(`${API_URL}/getProductById/${idProduct}`, {
+            const response = await axios.get(`${API_URL}/getProductById/${idProduct}`, {
                 headers: { 'Content-Type': 'application/json' }
             });
 
