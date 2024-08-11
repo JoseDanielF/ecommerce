@@ -1,0 +1,98 @@
+.TelaPrincipalContainer {
+  background-color: #1C4839;
+  color: white;
+  min-height: 100vh;
+  padding: 0 80px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainContent {
+  margin: 60px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.Button {
+  background-color: #FF9113;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.Button:hover {
+  background-color: #E68010;
+}
+
+.Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paper {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 100%;
+  max-width: 800px;
+}
+
+.priceContainer {
+  margin-top: 20px;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #ff4d4f;
+  font-size: 18px;
+}
+
+.discountedPrice {
+  color: #28a745;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.discount {
+  color: #f1c40f;
+  font-size: 18px;
+}
+
+.productImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.quantityField {
+  margin-right: 20px;
+  max-width: 100px;
+}
+
+.actionContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
