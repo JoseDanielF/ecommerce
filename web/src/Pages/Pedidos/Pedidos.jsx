@@ -30,7 +30,7 @@ function Pedidos() {
     setCarregando(true);
     try {
       const resposta = await pedidosService.getAllBuys();
-      if (resposta.error === false) {
+      if (!resposta.error) {
         const pedidosComProdutos = await Promise.all(
           resposta.data.map(async (pedido) => {
             const produto = await obterProduto(pedido.idproduto, pedido.fornecedor);
@@ -42,7 +42,7 @@ function Pedidos() {
         alert(resposta.message);
       }
     } catch (erro) {
-      alert(erro.message);
+      alert(`Erro ao carregar pedidos: ${erro.message}`);
     } finally {
       setCarregando(false);
     }
@@ -68,18 +68,22 @@ function Pedidos() {
             ) : (
               pedidos.map((pedido, index) => (
                 <div key={index} className={Styles.pedidoItem}>
-                  <p><strong>ID do Pedido:</strong> {pedido.id}</p>
-                  <p><strong>Data:</strong> {new Date(pedido.datapedido).toLocaleDateString('pt-BR')}</p>
-                  <p><strong>Quantidade:</strong> {pedido.quantidade}</p>
-                  <p><strong>Total:</strong> R$ {pedido.preco}</p>
-                  {pedido.produto ? (
-                    <div>
-                      <p><strong>Produto:</strong> {pedido.produto.nome || pedido.produto.name}</p>
-                      <p><strong>Descrição:</strong> {pedido.produto.descricao || pedido.produto.description}</p>
-                    </div>
-                  ) : (
-                    <p>Informações do produto indisponíveis</p>
-                  )}
+                  <div className={Styles.pedidoItemImage}>
+                    <img src={pedido.produto?.imagem || '/path/to/default-image.png'} alt={pedido.produto?.nome || pedido.produto?.name} />
+                  </div>
+                  <div className={Styles.pedidoItemDetails}>
+                    <p><strong>Data:</strong> {new Date(pedido.datapedido).toLocaleDateString('pt-BR')}</p>
+                    <p><strong>Quantidade:</strong> {pedido.quantidade}</p>
+                    <p><strong>Total:</strong> R$ {pedido.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
+                    {pedido.produto ? (
+                      <>
+                        <p><strong>Produto:</strong> {pedido.produto.nome || pedido.produto.name}</p>
+                        <p><strong>Descrição:</strong> {pedido.produto.descricao || pedido.produto.description}</p>
+                      </>
+                    ) : (
+                      <p>Informações do produto indisponíveis</p>
+                    )}
+                  </div>
                 </div>
               ))
             )}

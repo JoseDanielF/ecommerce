@@ -61,5 +61,21 @@
   border: 1px solid #ccc;
   border-radius: 30px !important;
   width: 100%;
-  margin-left: -24px;
+  max-width: 800px;
+}
+
+.pedidoItem {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.pedidoItemImage img {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.pedidoItemDetails {
+  flex-grow: 1;
 }

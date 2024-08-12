@@ -5,7 +5,7 @@ import { IoMdExit } from "react-icons/io";
 import Styles from '../Header/Header.module.css';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 
-const Header = ({ cartItemCount }) => {
+const Header = ({ quantidadeCarrinho }) => {
   const navigate = useNavigate();
 
   const goToProfile = () => {
@@ -30,8 +30,8 @@ const Header = ({ cartItemCount }) => {
         </div>
         <div className={Styles.iconBox} onClick={goToCarrinho}>
           <FaShoppingCart className={Styles.profileIcon} />
-          {cartItemCount > 0 && (
-            <div className={Styles.cartCount}>{cartItemCount}</div>
+          {quantidadeCarrinho > 0 && (
+            <div className={Styles.cartCount}>{quantidadeCarrinho}</div>
           )}
         </div>
         <div className={Styles.iconBox} style={{marginRight: 15}} onClick={realizarLogout}>

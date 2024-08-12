@@ -2,6 +2,7 @@ import React from 'react';
 import Styles from './TelaPrincipal.module.css';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
+import { FaBoxOpen, FaClipboardList, FaShoppingCart } from 'react-icons/fa';
 
 function TelaPrincipal() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function TelaPrincipal() {
   const handlePedidos = () => {
     navigate('/pedidos');
   };
-  
+
   const handleCarrinho = () => {
     navigate('/carrinho');
   };
@@ -23,17 +24,17 @@ function TelaPrincipal() {
       <Header />
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
-          <h1>Bem Vindo</h1>
+          <h1>Bem-vindo!</h1>
         </div>
         <div className={Styles.buttonContainer}>
           <button type="button" className={Styles.BackButton} onClick={handleProdutos}>
-            Produtos
+            <FaBoxOpen className={Styles.icon} /> Produtos
           </button>
           <button type="button" className={Styles.BackButton} onClick={handlePedidos}>
-            Pedidos
+            <FaClipboardList className={Styles.icon} /> Pedidos
           </button>
           <button type="button" className={Styles.BackButton} onClick={handleCarrinho}>
-            Carrinho
+            <FaShoppingCart className={Styles.icon} /> Carrinho
           </button>
         </div>
       </div>
