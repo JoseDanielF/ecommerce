@@ -2,7 +2,7 @@ import React from 'react';
 import Styles from './Carrinho.module.css';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
-import { Paper, Button } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import pedidosService from '../../Services/Pedidos/Pedidos-service';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 
@@ -44,7 +44,7 @@ function Carrinho({ itens = [] }) {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={itens.length} />
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Carrinho</h1>
@@ -57,7 +57,7 @@ function Carrinho({ itens = [] }) {
                   <img src={item.imagem || item.gallery[0]} alt={item.name || item.nome} className={Styles.cartItemImage} />
                   <div className={Styles.cartItemDetails}>
                     <p><strong>{item.name || item.nome}</strong></p>
-                    <p>Quantidade: {item.quantity}</p>
+                    <p>Quantidade: {item.quantidade}</p>
                     <p>Preço Unitário: R$ {item.price || item.preco}</p>
                     {item.hasDiscount && (
                       <p>Preço com Desconto: R$ {(item.price - (item.price * item.discountValue)).toFixed(2)}</p>

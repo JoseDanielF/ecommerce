@@ -4,7 +4,8 @@ import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { FaBoxOpen, FaClipboardList, FaShoppingCart } from 'react-icons/fa';
 
-function TelaPrincipal() {
+function TelaPrincipal(quantidadeCarrinho) {
+  console.log(quantidadeCarrinho)
   const navigate = useNavigate();
 
   const handleProdutos = () => {
@@ -21,7 +22,7 @@ function TelaPrincipal() {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={quantidadeCarrinho} />
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Bem-vindo!</h1>

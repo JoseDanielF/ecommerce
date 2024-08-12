@@ -9,7 +9,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-function Produtos() {
+function Produtos(quantidadeCarrinho) {
   const navigate = useNavigate();
   const [carregando, setCarregando] = useState(true);
   const [produtos, setProdutos] = useState([]);
@@ -117,7 +117,7 @@ function Produtos() {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={quantidadeCarrinho.toString()}/>
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Produtos</h1>

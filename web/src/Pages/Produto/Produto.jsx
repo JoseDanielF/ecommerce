@@ -6,7 +6,7 @@ import Header from '../Header/Header';
 import { Paper, CircularProgress, Button, TextField } from '@material-ui/core';
 import produtosService from '../../Services/Produtos/Produtos-service';
 
-function Produto({ adicionarCarrinho }) {
+function Produto({ adicionarCarrinho, quantidadeCarrinho }) {
   const { id, pais } = useParams();
   const navigate = useNavigate();
   const [carregando, setCarregando] = useState(true);
@@ -48,7 +48,7 @@ function Produto({ adicionarCarrinho }) {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={quantidadeCarrinho.toString()} />
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           {carregando ? (

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaUserCircle, FaShoppingCart } from 'react-icons/fa';
 import { IoMdExit } from "react-icons/io";
@@ -6,6 +6,7 @@ import Styles from '../Header/Header.module.css';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 
 const Header = ({ quantidadeCarrinho }) => {
+  console.log(quantidadeCarrinho);
   const navigate = useNavigate();
 
   const goToProfile = () => {
@@ -30,11 +31,11 @@ const Header = ({ quantidadeCarrinho }) => {
         </div>
         <div className={Styles.iconBox} onClick={goToCarrinho}>
           <FaShoppingCart className={Styles.profileIcon} />
-          {quantidadeCarrinho > 0 && (
-            <div className={Styles.cartCount}>{quantidadeCarrinho}</div>
-          )}
+          <div className={Styles.cartCount}>
+            {typeof quantidadeCarrinho === 'number' ? quantidadeCarrinho.toString() : '0'}
+          </div>
         </div>
-        <div className={Styles.iconBox} style={{marginRight: 15}} onClick={realizarLogout}>
+        <div className={Styles.iconBox} style={{ marginRight: 15 }} onClick={realizarLogout}>
           <IoMdExit className={Styles.profileIcon} />
         </div>
       </div>

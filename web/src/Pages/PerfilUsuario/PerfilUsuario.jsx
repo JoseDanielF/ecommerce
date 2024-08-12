@@ -9,7 +9,7 @@ import usuarioService from '../../Services/Usuario/Usuario-service';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 import IconButton from '@material-ui/core/IconButton';
 
-const UserProfile = () => {
+const UserProfile = (quantidadeCarrinho) => {
   const [formData, setFormData] = useState({
     email: dadosUserLogadoService.getUserInfo().email,
     nome: dadosUserLogadoService.getUserInfo().nome,
@@ -117,7 +117,7 @@ const UserProfile = () => {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={quantidadeCarrinho.toString()}/>
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Perfil</h1>

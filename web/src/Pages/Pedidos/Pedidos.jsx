@@ -4,9 +4,9 @@ import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { Paper } from '@material-ui/core';
 import pedidosService from '../../Services/Pedidos/Pedidos-service';
-import produtosService from '../../Services/Produtos/Produtos-service'; // Importar o serviço de produtos
+import produtosService from '../../Services/Produtos/Produtos-service';
 
-function Pedidos() {
+function Pedidos(quantidadeCarrinho) {
   const navigate = useNavigate();
   const [carregando, setCarregando] = useState(true);
   const [pedidos, setPedidos] = useState([]);
@@ -54,7 +54,7 @@ function Pedidos() {
 
   return (
     <>
-      <Header />
+      <Header quantidadeCarrinho={quantidadeCarrinho.toString()}/>
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Pedidos</h1>
