@@ -276,20 +276,21 @@ exports.getAllProducts = async (req, res) => {
 };
 
 exports.getProductByID = async (req, res) => {
-    const { id } = req.params;
+    const { country, id } = req.params;
 
     try {
-        const europeanResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider/${id}`);
-        const brazilianResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${id}`);
+        let productResponse;
+        if (country === 'eu') {
+            productResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/european_provider/${id}`);
+        } else if (country === 'br') {
+            productResponse = await axios.get(`http://616d6bdb6dacbb001794ca17.mockapi.io/devnology/brazilian_provider/${id}`);
+        } else {
+            return res.status(400).json({ error: 'Invalid country code' });
+        }
 
-        const combinedProduct = {
-            europeanProvider: europeanResponse.data,
-            brazilianProvider: brazilianResponse.data,
-        };
-
-        res.json(combinedProduct);
+        res.json(productResponse.data);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to get products', message: err.message });
+        res.status(500).json({ error: 'Failed to get product', message: err.message });
     }
 };
 

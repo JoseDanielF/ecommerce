@@ -15,11 +15,11 @@ function Pedidos({ quantidadeCarrinho }) {
     navigate('/telaPrincipal');
   };
 
-  const obterProduto = async (idproduto, fornecedor) => {
+  const obterProduto = async (fornecedor, idproduto) => {
     try {
-      const response = await produtosService.getProductByID(idproduto);
+      const response = await produtosService.getProductByID(fornecedor, idproduto);
       const data = response.data;
-      return fornecedor === 'eu' ? data.europeanProvider : data.brazilianProvider;
+      return data;
     } catch (erro) {
       alert(`Erro ao obter produto: ${erro.message}`);
       return null;
@@ -33,7 +33,7 @@ function Pedidos({ quantidadeCarrinho }) {
       if (!resposta.error) {
         const pedidosComProdutos = await Promise.all(
           resposta.data.map(async (pedido) => {
-            const produto = await obterProduto(pedido.idproduto, pedido.fornecedor);
+            const produto = await obterProduto(pedido.fornecedor, pedido.idproduto);
             return { ...pedido, produto };
           })
         );

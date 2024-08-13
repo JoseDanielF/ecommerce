@@ -24,9 +24,9 @@ class ProdutosService {
         }
     };
 
-    async getProductByID(idProduct) {
+    async getProductByID(country, idProduct) {
         try {
-            const response = await axios.get(`${API_URL}/getProductById/${idProduct}`, {
+            const response = await axios.get(`${API_URL}/getProductById/${country}/${idProduct}`, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

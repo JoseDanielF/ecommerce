@@ -16,15 +16,9 @@ function Produto({ adicionarCarrinho, quantidadeCarrinho}) {
   useEffect(() => {
     async function fetchProduto() {
       try {
-        const response = await produtosService.getProductByID(id);
+        const response = await produtosService.getProductByID(pais, id);
         const data = response.data;
-        let produtoSelecionado;
-        if (pais === 'eu') {
-          produtoSelecionado = data.europeanProvider;
-        } else {
-          produtoSelecionado = data.brazilianProvider;
-        }
-        setProduto(produtoSelecionado);
+        setProduto(data);
         setCarregando(false);
       } catch (error) {
         setCarregando(false);
