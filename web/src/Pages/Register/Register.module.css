@@ -2,11 +2,10 @@
   background-color: #1C4839;
   color: white;
   min-height: 100vh;
+  padding: 0 80px 40px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
 }
 
 .title {
@@ -16,22 +15,26 @@
 
 .paper {
   padding: 20px;
-  margin: 20px;
   border: 1px solid #ccc;
   border-radius: 30px !important;
   width: 100%;
+  margin-left: -24px;
 }
- 
+
+
 .passwordCriteria {
   margin-bottom: 10px;
   color: #333;
 }
 
 .registerHeader {
+  margin: 60px auto;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  width: 100%;
+  margin-top: 120px;
 }
 
 .registerHeader .logo {
@@ -130,22 +133,21 @@
 }
 
 .backToLogin a {
-  color: #FF9113; 
+  color: #FF9113;
   text-decoration: none;
 }
 
 .backToLogin a:hover {
-  color: #E68010; 
+  color: #E68010;
 }
 
 .passwordTooltip {
   color: black;
 }
 
-.buttonContainer { 
+.buttonContainer {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   margin-top: 20px;
 }
-
