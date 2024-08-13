@@ -17,7 +17,7 @@ Você deve construir uma pequena aplicação de ecommerce de acordo com o seguin
 * versão 20.15.1
 
 ## :construction: Status do Projeto
-Inicial
+Finalizado
 
 ## :computer: Instruções para Configuração do Ambiente
 
