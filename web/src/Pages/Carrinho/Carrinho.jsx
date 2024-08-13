@@ -78,7 +78,7 @@ function Carrinho({ itens = [], quantidadeCarrinho, limparCarrinho }) {
           </Paper>
         </div>
         <div className={Styles.buttonContainer}>
-          <button variant="contained" className={Styles.Button} onClick={handleVoltar}>
+          <button variant="contained" className={Styles.Button} style={{marginRight: 10}} onClick={handleVoltar}>
             Voltar
           </button>
           <button variant="contained" className={Styles.Button} onClick={handleFinalizarCompra}>

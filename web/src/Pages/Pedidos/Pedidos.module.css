@@ -3,7 +3,7 @@
   color: white;
   min-height: 100vh;
   padding: 0 80px 40px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
@@ -17,6 +17,14 @@
   width: 100%;
 }
 
+.paper {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 100%;
+  margin-left: -24px;
+}
+
 .BackButton {
   background-color: #FF9113;
   color: #fff;
@@ -28,10 +36,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
 }
 
-.buttonContainer { 
+.buttonContainer {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
@@ -56,17 +63,14 @@
   color: #333;
 }
 
-.paper {
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 30px !important;
-  width: 100%;
-  max-width: 800px;
-}
-
 .pedidoItem {
   display: flex;
   margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: white;
+  color: black;
 }
 
 .pedidoItemImage img {
@@ -74,6 +78,7 @@
   height: auto;
   margin-right: 20px;
   border-radius: 10px;
+  object-fit: cover;
 }
 
 .pedidoItemDetails {

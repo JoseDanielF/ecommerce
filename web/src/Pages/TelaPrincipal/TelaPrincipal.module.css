@@ -2,7 +2,7 @@
   background-color: #1C4839;
   color: white;
   height: 100vh;
-  padding: 0 80px 40px;
+  padding: 0 20px 40px;
 }
 
 .mainContent {
@@ -15,10 +15,11 @@
 
 .buttonContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   width: 100%;
   margin-top: 20px;
   padding: 0 20px;
+  margin-left: -22px;
 }
 
 .BackButton {
@@ -31,9 +32,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   flex-direction: column;
+  margin: 0 10px;
   transition: background-color 0.3s ease;
 }
 

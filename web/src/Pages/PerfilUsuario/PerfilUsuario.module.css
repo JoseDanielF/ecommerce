@@ -51,7 +51,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
 }
 
 .SaveButton {
@@ -75,7 +74,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
 }
 .BackButton:hover {
   background-color: #E68010;

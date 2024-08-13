@@ -117,7 +117,7 @@ function Produtos({quantidadeCarrinho}) {
 
   return (
     <>
-      <Header quantidadeCarrinho={quantidadeCarrinho.toString()}/>
+      <Header quantidadeCarrinho={quantidadeCarrinho}/>
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Produtos</h1>

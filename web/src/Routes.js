@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes as RouterRoutes, Navigate, useLocation } from 'react-router-dom';
 import dadosUserLogadoService from './Services/DadosUserLogado/DadosUserLogado-service';
 
 // Pages
@@ -23,7 +23,7 @@ const PublicRoute = ({ element }) => {
   return !isAuthenticated ? element : <Navigate to="/telaPrincipal" replace />;
 };
 
-const Routes = () => {
+const AppRoutes = () => {
   const [itens, setItems] = useState([]);
 
   const adicionarCarrinho = (produto, quantidade, pais) => {
@@ -45,14 +45,31 @@ const Routes = () => {
   const limparCarrinho = () => {
     setItems([]);
   };
-  
+
   const calcularQuantidadeTotal = () => {
     return itens.reduce((total, item) => total + item.quantidade, 0);
   };
 
   return (
     <BrowserRouter>
-      <Header quantidadeCarrinho={calcularQuantidadeTotal()} />
+      <MainRoutes
+        itens={itens}
+        adicionarCarrinho={adicionarCarrinho}
+        limparCarrinho={limparCarrinho}
+        calcularQuantidadeTotal={calcularQuantidadeTotal}
+      />
+    </BrowserRouter>
+  );
+};
+
+const MainRoutes = ({ itens, adicionarCarrinho, limparCarrinho, calcularQuantidadeTotal }) => {
+  const location = useLocation();
+
+  return (
+    <>
+      {location.pathname !== '/login' && location.pathname !== '/register' && (
+        <Header quantidadeCarrinho={calcularQuantidadeTotal()} />
+      )}
       <RouterRoutes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
@@ -61,13 +78,12 @@ const Routes = () => {
         <Route path="/telaPrincipal" element={<PrivateRoute element={<TelaPrincipal quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
         <Route path="/perfil" element={<PrivateRoute element={<UserProfile quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
         <Route path="/produtos" element={<PrivateRoute element={<Produtos quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
-        <Route path="/produto/:id/:pais" element={<Produto adicionarCarrinho={adicionarCarrinho} quantidadeCarrinho={calcularQuantidadeTotal()} />} />
-        <Route path="/carrinho" element={<Carrinho itens={itens} quantidadeCarrinho={calcularQuantidadeTotal()} limparCarrinho={limparCarrinho} />} />
+        <Route path="/produto/:id/:pais" element={<PrivateRoute element={<Produto adicionarCarrinho={adicionarCarrinho} quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
+        <Route path="/carrinho" element={<PrivateRoute element={<Carrinho itens={itens} quantidadeCarrinho={calcularQuantidadeTotal()} limparCarrinho={limparCarrinho} />} />} />
         <Route path="/pedidos" element={<PrivateRoute element={<Pedidos quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
-
       </RouterRoutes>
-    </BrowserRouter>
+    </>
   );
 };
 
-export default Routes;
+export default AppRoutes;

@@ -2,10 +2,11 @@
   background-color: #1C4839;
   color: white;
   min-height: 100vh;
-  padding: 0 80px 40px;
+  padding: 0 20px 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .mainContent {
@@ -17,17 +18,97 @@
   width: 100%;
 }
 
-.productGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
+.paper {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 30px !important;
+  width: 90%;
+}
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
   width: 100%;
+}
+
+.filterOptions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.searchBar {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+}
+
+.filterSelect {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  max-width: 250px;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.paginationControls label,
+.paginationControls select {
+  margin-right: 10px;
+}
+
+.paginationControls select {
+  padding: 5px;
+  margin-right: auto;
+}
+
+.productCount {
+  margin-left: auto;
+  font-size: 1.2em;
+  color: #FF9113;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.noProductsMessage {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  color: #ff0000;
+}
+
+.paginationContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+  gap: 10px;
 }
 
 .buttonContainer {
   display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: center;
   margin-top: 20px;
 }
 
@@ -42,73 +123,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: auto;
+  min-width: 150px;
 }
 
 .BackButton:hover {
   background-color: #E68010;
 }
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.noProductsMessage {
-  width: 100%;
-  text-align: center;
-  margin-top: 20px;
-  color: #ff0000;
-}
-
-.productCount {
-  font-size: 1.2em;
-  margin-top: 20px;
-  color: #FF9113;
-}
-
-.filterContainer {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.filterOptions {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.searchBar {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  width: 200px;
-}
-
-.filterSelect {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 5px;
-  border: none;
-  width: 200px;
-}
-
-.filterButton {
-  background-color: #FF9113;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.filterButton:hover {
-  background-color: #E68010;
+.BackButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .loading {
@@ -123,47 +148,4 @@
   margin-top: 10px;
   font-size: 1em;
   color: #333;
-}
-
-.paper {
-  padding: 20px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 30px !important;
-  width: 100%;
-}
-
-.paginationContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.BackButton:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.paginationControls {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.paginationControls label {
-  margin-right: 10px;
-}
-
-.paginationControls select {
-  padding: 5px;
-  margin-right: auto;
-}
-
-.productCount {
-  margin-left: auto;
-  font-size: 1.2em;
-  color: #FF9113;
 }
