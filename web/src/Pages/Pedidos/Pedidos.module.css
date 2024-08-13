@@ -84,3 +84,21 @@
 .pedidoItemDetails {
   flex-grow: 1;
 }
+
+.filterContainer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.searchBar {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+}
