@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Routes as RouterRoutes, Navigate } from 'react-router-dom';
 import dadosUserLogadoService from './Services/DadosUserLogado/DadosUserLogado-service';
 
@@ -28,34 +28,43 @@ const Routes = () => {
 
   const adicionarCarrinho = (produto, quantidade, pais) => {
     setItems((prevItems) => {
-      const existingItemIndex = prevItems.findIndex(item => item.id === produto.id && item.pais === pais);
+      const itemExistente = prevItems.findIndex(item => item.id === produto.id && item.pais === pais);
 
-      if (existingItemIndex >= 0) {
-        const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantidade += quantidade;
-        return updatedItems;
+      if (itemExistente >= 0) {
+        const atualizarItens = [...prevItems];
+        const quantidadeAtualizada = Number(atualizarItens[itemExistente].quantidade) + Number(quantidade);
+        atualizarItens[itemExistente].quantidade = quantidadeAtualizada;
+        return atualizarItens;
       } else {
-        return [...prevItems, { ...produto, quantidade, pais }];
+        const novoItem = { ...produto, quantidade: Number(quantidade), pais };
+        return [...prevItems, novoItem];
       }
     });
   };
 
-  const quantidadeCarrinho = itens.reduce((acc, item) => acc + item.quantidade, 0);
+  const limparCarrinho = () => {
+    setItems([]);
+  };
+  
+  const calcularQuantidadeTotal = () => {
+    return itens.reduce((total, item) => total + item.quantidade, 0);
+  };
 
   return (
     <BrowserRouter>
-      <Header quantidadeCarrinho={quantidadeCarrinho} />
+      <Header quantidadeCarrinho={calcularQuantidadeTotal()} />
       <RouterRoutes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<PublicRoute element={<Login />} />} />
         <Route path="/register" element={<PublicRoute element={<Register />} />} />
 
-        <Route path="/telaPrincipal" element={<PrivateRoute element={<TelaPrincipal quantidadeCarrinho={quantidadeCarrinho} />} />} />
-        <Route path="/perfil" element={<PrivateRoute element={<UserProfile quantidadeCarrinho={quantidadeCarrinho}/>} />} />
-        <Route path="/produtos" element={<PrivateRoute element={<Produtos quantidadeCarrinho={quantidadeCarrinho}/>} />} />
-        <Route path="/produto/:id/:pais" element={<Produto adicionarCarrinho={adicionarCarrinho} quantidadeCarrinho={quantidadeCarrinho}/>} />
-        <Route path="/carrinho" element={<Carrinho itens={itens} />} />
-        <Route path="/pedidos" element={<PrivateRoute element={<Pedidos quantidadeCarrinho={quantidadeCarrinho}/>} />} />
+        <Route path="/telaPrincipal" element={<PrivateRoute element={<TelaPrincipal quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
+        <Route path="/perfil" element={<PrivateRoute element={<UserProfile quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
+        <Route path="/produtos" element={<PrivateRoute element={<Produtos quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
+        <Route path="/produto/:id/:pais" element={<Produto adicionarCarrinho={adicionarCarrinho} quantidadeCarrinho={calcularQuantidadeTotal()} />} />
+        <Route path="/carrinho" element={<Carrinho itens={itens} quantidadeCarrinho={calcularQuantidadeTotal()} limparCarrinho={limparCarrinho} />} />
+        <Route path="/pedidos" element={<PrivateRoute element={<Pedidos quantidadeCarrinho={calcularQuantidadeTotal()} />} />} />
+
       </RouterRoutes>
     </BrowserRouter>
   );

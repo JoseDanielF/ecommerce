@@ -9,7 +9,7 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-function Produtos(quantidadeCarrinho) {
+function Produtos({quantidadeCarrinho}) {
   const navigate = useNavigate();
   const [carregando, setCarregando] = useState(true);
   const [produtos, setProdutos] = useState([]);

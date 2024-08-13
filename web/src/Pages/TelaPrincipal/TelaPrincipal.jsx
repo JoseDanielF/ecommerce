@@ -4,8 +4,7 @@ import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
 import { FaBoxOpen, FaClipboardList, FaShoppingCart } from 'react-icons/fa';
 
-function TelaPrincipal(quantidadeCarrinho) {
-  console.log(quantidadeCarrinho)
+function TelaPrincipal({quantidadeCarrinho}) {
   const navigate = useNavigate();
 
   const handleProdutos = () => {

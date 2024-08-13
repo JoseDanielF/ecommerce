@@ -9,7 +9,7 @@ class PedidosService {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            if (response.status === 200)
+            if (response.status === 201)
                 return {
                     error: false,
                     data: response.data,

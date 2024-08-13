@@ -6,7 +6,6 @@ import Styles from '../Header/Header.module.css';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 
 const Header = ({ quantidadeCarrinho }) => {
-  console.log(quantidadeCarrinho);
   const navigate = useNavigate();
 
   const goToProfile = () => {
@@ -32,7 +31,7 @@ const Header = ({ quantidadeCarrinho }) => {
         <div className={Styles.iconBox} onClick={goToCarrinho}>
           <FaShoppingCart className={Styles.profileIcon} />
           <div className={Styles.cartCount}>
-            {typeof quantidadeCarrinho === 'number' ? quantidadeCarrinho.toString() : '0'}
+            {Number.isNaN(quantidadeCarrinho) ? '0' : quantidadeCarrinho.toString()}
           </div>
         </div>
         <div className={Styles.iconBox} style={{ marginRight: 15 }} onClick={realizarLogout}>

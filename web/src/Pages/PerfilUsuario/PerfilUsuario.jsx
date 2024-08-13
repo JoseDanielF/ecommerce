@@ -9,7 +9,7 @@ import usuarioService from '../../Services/Usuario/Usuario-service';
 import dadosUserLogadoService from '../../Services/DadosUserLogado/DadosUserLogado-service';
 import IconButton from '@material-ui/core/IconButton';
 
-const UserProfile = (quantidadeCarrinho) => {
+const UserProfile = ({quantidadeCarrinho}) => {
   const [formData, setFormData] = useState({
     email: dadosUserLogadoService.getUserInfo().email,
     nome: dadosUserLogadoService.getUserInfo().nome,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Styles from './Pedidos.module.css';
 import Header from '../Header/Header';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { Paper } from '@material-ui/core';
 import pedidosService from '../../Services/Pedidos/Pedidos-service';
 import produtosService from '../../Services/Produtos/Produtos-service';
 
-function Pedidos(quantidadeCarrinho) {
+function Pedidos({ quantidadeCarrinho }) {
   const navigate = useNavigate();
   const [carregando, setCarregando] = useState(true);
   const [pedidos, setPedidos] = useState([]);
@@ -26,7 +26,7 @@ function Pedidos(quantidadeCarrinho) {
     }
   };
 
-  const obterTodosPedidos = async () => {
+  const obterTodosPedidos = useCallback(async () => {
     setCarregando(true);
     try {
       const resposta = await pedidosService.getAllBuys();
@@ -38,15 +38,15 @@ function Pedidos(quantidadeCarrinho) {
           })
         );
         setPedidos(pedidosComProdutos);
+        setCarregando(false);
       } else {
         alert(resposta.message);
+        setCarregando(false);
       }
     } catch (erro) {
       alert(`Erro ao carregar pedidos: ${erro.message}`);
-    } finally {
-      setCarregando(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     obterTodosPedidos();
@@ -54,7 +54,7 @@ function Pedidos(quantidadeCarrinho) {
 
   return (
     <>
-      <Header quantidadeCarrinho={quantidadeCarrinho.toString()}/>
+      <Header quantidadeCarrinho={quantidadeCarrinho.toString()} />
       <div className={Styles.TelaPrincipalContainer}>
         <div className={Styles.mainContent}>
           <h1>Pedidos</h1>
